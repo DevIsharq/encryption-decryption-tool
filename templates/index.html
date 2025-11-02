@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block title %}Home - File Encryption Tool{% endblock %}
+
+{% block content %}
+<div class="text-center mt-5">
+    <h2 class="text-success text-ligh">Welcome to the File Encryption and Decryption Tool</h2>
+    <p class="lead fs-3 text-ligh">Securely encrypt and decrypt your files with ease.</p>
+    <p class="fs-3 text-ligh">Developed by <b class="text-success"><u>Sadiq</u></b></p>
+    <a href="{{ url_for('register') }}" class="btn btn-success px-3 fs-4">Get Started</a>
+    <a href="{{ url_for('login') }}" class="btn btn-outline-success px-3 fs-4">Login</a>
+</div>
+{% endblock %}

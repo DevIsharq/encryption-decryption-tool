@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block title %}Dashboard - File Encryption Tool{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center">Welcome, {{ username }}!</h2>
+    <p class="text-center">Upload a file to encrypt or decrypt.</p>
+
+    <div class="row mt-4">
+        <div class="col-md-6">
+            <h4>Encrypt a File</h4>
+            <form method="POST" action="{{ url_for('upload_file') }}" enctype="multipart/form-data">
+                <div class="mb-3">
+                    <input type="file" class="form-control" name="file" required>
+                </div>
+                <button type="submit" class="btn btn-success">Encrypt</button>
+            </form>
+        </div>
+        <div class="col-md-6">
+            <h4>Decrypt a File</h4>
+            <form method="POST" action="{{ url_for('decrypt_uploaded_file') }}" enctype="multipart/form-data">
+                <div class="mb-3">
+                    <input type="file" class="form-control" name="file" required>
+                </div>
+                <button type="submit" class="btn btn-warning">Decrypt</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="mt-5">
+        <!-- Download Encrypted Files -->
+        <h4>Download Encrypted Files</h4>
+        <ul class="list-group">
+            {% for file in encrypted_files %}
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                {{ file }}
+                <a href="{{ url_for('download_file', folder=encrypted_folder, filename=file) }}" class="btn btn-primary btn-sm">Download</a>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="mt-5">
+        <!-- Download Decrypted Files -->
+        <h4>Download Decrypted Files</h4>
+        <ul class="list-group">
+            {% for file in decrypted_files %}
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                {{ file }}
+                <a href="{{ url_for('download_file', folder=decrypted_folder, filename=file) }}" class="btn btn-secondary btn-sm">Download</a>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endblock %}
